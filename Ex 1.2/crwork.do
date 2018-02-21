@@ -57,6 +57,7 @@ tab country if _merge==2
 drop if _merge==1
 // Drop the _merge column.
 drop _merge
+// Because they share the same currency (Euro).
 
 // Question 12
 // Restructure the data to long.
