@@ -11,6 +11,11 @@ cd "/Users/juangesino/Documents/UvA/Research Project/Lab/Ex 1.2"
 // Import Excel data file.
 import excel "/Users/juangesino/Documents/UvA/Research Project/Lab/Ex 1.2/M3.xlsx", sheet("Monetary aggregates  - Broad Mo") cellrange(A7:AY36) firstrow case(lower)
 
+// Question 4
+// The variables are named according to the Excel column name.
+// Red variables are strings and black values are numbers.
+// The values in column ar are all 100 becuase 2010 is the base year.
+
 // Question 5
 // Copies all countries to b (with non OECD).
 replace b = country if mi(b)
