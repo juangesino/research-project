@@ -18,19 +18,16 @@ set type double, perm
 use upop.dta
 /*
 The data file contains 3 variables (id, y0 and y1).
-
 The varaible id is an identifier number for each person.
-The other variables determine if the person got a job
-after 8 months when there was no JSA and when there was.
+The other variables determines if the person got a job
+after 8 months when there was JSA and when there wasn't.
 */
 // Question 2
 tab y0 y1, cell
 /*
-TODO: Explain what you see. Is the effect of JSA positive for
-everyone? Can you think of a reason why not?
-
 The table shows the number of people that have that got
-a job after 8 months with or without JSA.
+a job after 8 months with and without JSA.
+The effect of JSA is not positive for everyone.
 */
 // Question 3
 egen y0popav = mean(y0)
@@ -38,8 +35,13 @@ egen y1popav = mean(y1)
 gen ate = y1popav - y0popav
 sum y0 y1 y0popav y1popav ate
 /*
-TODO: What do the summary statistics tell you? What does ate stand for, and how can we
-interpret it?
+TODO:
+What do the summary statistics tell you?
+Number of obs., std. dev., average, min and max.
+
+What does ate stand for, and how can we interpret it?
+ATE means 'Average Treatment Effect'. It's the difference
+between the averages of the two potential outcomes
 */
 // Question 4
 hist y0, frac name(gry0) nodraw
@@ -104,9 +106,9 @@ timer list 1
 sort id
 order rdraw y0mean - n1, last
 /*
-It took the program 40" to run 500 simulations.
-This means it took 0.08" for each simulation.
-For 10,000 simulations the expected time is 800" (13').
+It took the program 40s to run 500 simulations.
+This means it took 0.08s for each simulation.
+For 10,000 simulations the expected time is 800s (13min).
 */
 // Question 9
 sum rdraw
