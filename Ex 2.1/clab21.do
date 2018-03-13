@@ -35,11 +35,10 @@ egen y1popav = mean(y1)
 gen ate = y1popav - y0popav
 sum y0 y1 y0popav y1popav ate
 /*
-TODO:
-What do the summary statistics tell you?
-Number of obs., std. dev., average, min and max.
-
-What does ate stand for, and how can we interpret it?
+The mean for y0 is 0.3 and the mean for y1 is 0.38
+So the ATE is 0.08 (0.38-0.3)
+This means there are more people who got a job with
+JSA than when there was no JSA.
 ATE means 'Average Treatment Effect'. It's the difference
 between the averages of the two potential outcomes
 */
@@ -65,8 +64,15 @@ random_sample 1000
 sum y0 y1 s x y
 /*
 TODO: Can you explain these statistics?
-s is a binary variable that determines if the obs. is part
+
+"s" is a binary variable that determines if the obs. is part
 of the sample or not.
+"x" is a random variable (either 0 or 1) that determines
+which value you would use for the observation (y0 or y1).
+"y" is the chosen value of y (y0 or y1) depending on x.
+The mean of x is 0.503, meaning that y0 and y1 were chosen
+symetrically. The mean for y is 0.333, meaning that 33% of
+the sample obs. got a job after 8 months.
 */
 // Question 6
 sum y if x==0
@@ -80,7 +86,9 @@ gen y1mean = r(mean)
 gen y1sd = r(sd)
 gen n1 = r(N)
 /*
-TODO: What is your guess of the effect of JSA based on this sample?
+TODO: What is your guess of the effect of JSA based on this
+ sample?
+
 */
 // Question 7
 sort id
@@ -115,7 +123,8 @@ sum rdraw
 sum y0mean y1mean
 hist y0mean, kdensity name(gry0mean_sim05k)
 /*
-TODO: What do these statistics and the graph tell you? Is it unlikely to observe only 25%
+TODO: What do these statistics and the graph tell you?
+Is it unlikely to observe only 25%
 employment amongst the no JSA group?
 */
 // Question 10
@@ -124,9 +133,10 @@ hist y0mean, kdensity name(gry0mean_sim20k)
 hist y0, frac name(gry0, replace)
 /*
 TODO: How do the distributions of the sample mean of y0 compare for the 500 and 20k
-simulation? Finally, when you look at the original distribution of y0, can you explain
-how (on earth) it can be that y0mean appears to be normally distributed while y0 is
-binary!?
+simulation?
+
+Because the mean of y0 can take non binary values,
+while the actual values of y0 can't.
 */
 // Question 11
 gen y0se = y0sd/sqrt(n0)
@@ -170,4 +180,5 @@ twoway (function y = normalden(x), range(-4 4) lc(red)), xline(`=r(t)') ///
 legend( order(1 "Normal distribution"))
 /*
 It is not surprising that the hypothesis was not rejected.
+The value lies very close to the center.
 */
