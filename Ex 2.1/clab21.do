@@ -63,16 +63,14 @@ end program
 random_sample 1000
 sum y0 y1 s x y
 /*
-TODO: Can you explain these statistics?
-
 "s" is a binary variable that determines if the obs. is part
 of the sample or not.
 "x" is a random variable (either 0 or 1) that determines
 which value you would use for the observation (y0 or y1).
 "y" is the chosen value of y (y0 or y1) depending on x.
 The mean of x is 0.503, meaning that y0 and y1 were chosen
-symetrically. The mean for y is 0.333, meaning that 33% of
-the sample obs. got a job after 8 months.
+almost symetrically. The mean for y is 0.333, meaning that
+33% of the sample obs. got a job after 8 months.
 */
 // Question 6
 sum y if x==0
@@ -86,9 +84,9 @@ gen y1mean = r(mean)
 gen y1sd = r(sd)
 gen n1 = r(N)
 /*
-TODO: What is your guess of the effect of JSA based on this
- sample?
-
+There doesn't seem to be enough evidence to predict
+a positive effect of JSA for this sample. The means
+are very similar.
 */
 // Question 7
 sort id
@@ -115,7 +113,7 @@ sort id
 order rdraw y0mean - n1, last
 /*
 It took the program 40s to run 500 simulations.
-This means it took 0.08s for each simulation.
+This means it took 0.08s per simulation.
 For 10,000 simulations the expected time is 800s (13min).
 */
 // Question 9
@@ -123,18 +121,19 @@ sum rdraw
 sum y0mean y1mean
 hist y0mean, kdensity name(gry0mean_sim05k)
 /*
-TODO: What do these statistics and the graph tell you?
-Is it unlikely to observe only 25%
-employment amongst the no JSA group?
+The samles means are normally distributed.
+It is highly unlikely to observe only 25% employment
+amongst the no JSA group.
 */
 // Question 10
 merge 1:1 rdraw using urdraw, update nogen
 hist y0mean, kdensity name(gry0mean_sim20k)
 hist y0, frac name(gry0, replace)
 /*
-TODO: How do the distributions of the sample mean of y0 compare for the 500 and 20k
-simulation?
-
+The distribution of sample means for 20k simulations
+reaseambles more a normal distribution than the 500
+simulations. We can see how the higher the samples,
+the closer it gets to a normal distribution.
 Because the mean of y0 can take non binary values,
 while the actual values of y0 can't.
 */
@@ -172,8 +171,8 @@ ttest y==0.3 if x==0
 We obtain the same results.
 In the first test, the probability of mean != 0 is 0
 In the second test, the probability of mean != 0.3 is 0.92
-
-TODO: Do you see the p-values? What are they?
+Yes, for the first H0 the p-value is 0 and for the second
+hypothesis, the p-value is 0.4609
 */
 // Question 15
 twoway (function y = normalden(x), range(-4 4) lc(red)), xline(`=r(t)') ///
