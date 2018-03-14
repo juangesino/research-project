@@ -28,6 +28,8 @@ tab y0 y1, cell
 The table shows the number of people that have that got
 a job after 8 months with and without JSA.
 The effect of JSA is not positive for everyone.
+This could be because people rejected some job offers
+for example.
 */
 // Question 3
 egen y0popav = mean(y0)
@@ -112,6 +114,7 @@ timer list 1
 sort id
 order rdraw y0mean - n1, last
 /*
+We start at 2 because we already had one sample already.
 It took the program 40s to run 500 simulations.
 This means it took 0.08s per simulation.
 For 10,000 simulations the expected time is 800s (13min).
