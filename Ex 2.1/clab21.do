@@ -1,5 +1,4 @@
-// Start Part 0
-
+/***** Start Part 0 *****/
 // Clear screen.
 cls
 // Clear memory.
@@ -10,16 +9,16 @@ cd "/Users/juangesino/Documents/UvA/Research Project/Lab/Ex 2.1"
 set seed 6774
 // Set variables precision
 set type double, perm
+/***** End Part 0 *****/
 
-// Start Part 1
-
+/***** Start Part 1 *****/
 // Question 1
 // Open potential ourcomes file
 use upop.dta
 /*
 The data file contains 3 variables (id, y0 and y1).
-The varaible id is an identifier number for each person.
-The other variables determines if the person got a job
+The variable id is an identifier number for each person.
+The other variables determine if the person got a job
 after 8 months when there was JSA and when there wasn't.
 */
 // Question 2
@@ -48,9 +47,9 @@ between the averages of the two potential outcomes
 hist y0, frac name(gry0) nodraw
 hist y1, frac name(gry1) nodraw
 graph combine gry0 gry1
+/***** End Part 1 *****/
 
-// Start Part 2
-
+/***** Start Part 2 *****/
 // Question 5
 program random_sample
 qui {
@@ -124,7 +123,7 @@ sum rdraw
 sum y0mean y1mean
 hist y0mean, kdensity name(gry0mean_sim05k)
 /*
-The samles means are normally distributed.
+The sample means are normally distributed.
 It is highly unlikely to observe only 25% employment
 amongst the no JSA group.
 */
@@ -134,7 +133,7 @@ hist y0mean, kdensity name(gry0mean_sim20k)
 hist y0, frac name(gry0, replace)
 /*
 The distribution of sample means for 20k simulations
-reaseambles more a normal distribution than the 500
+resembles more a normal distribution than the 500
 simulations. We can see how the higher the samples,
 the closer it gets to a normal distribution.
 Because the mean of y0 can take non binary values,
@@ -154,9 +153,9 @@ twoway (function y = normalden(x), range(-4 -1.96) color(sand) recast(area)) ///
 (function y = normalden(x), range(-4 4) lc(red) ), ///
 legend(order(1 "5% area (2.5%+2.5%)" 3 "Normal distribution")) ///
 xtitle(t-stat) ytitle(density) xlabel(-1.96 0 1.96) name(grnormal)
+/***** End Part 2 *****/
 
-// Start Part 3
-
+/***** Start Part 3 *****/
 // Question 13
 random_sample 1000
 sum y if x==0
@@ -184,3 +183,4 @@ legend( order(1 "Normal distribution"))
 It is not surprising that the hypothesis was not rejected.
 The value lies very close to the center.
 */
+/***** End Part 3 *****/
