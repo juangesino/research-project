@@ -31,15 +31,15 @@ cases were there was JSA in our sample. There were 480
 observations, with a mean of 0.38125 (slightly larger
 than the result for no JSA) and a standard deviation
 of 0.4862005.
-
+================
 T-test
+================
 H₀: μ₀ = μ₁
 H₁: μ₀ ≠ μ₁
 For computation see attached file `clab22.pdf`
 t-test = -2.57
 |t-test| > 1.96 (t-critical given ⍺ = 5%)
 => Reject H₀
-
 Given this sample and a significance level of 5%
 there is enough statistical evidence to reject H₀
 and conclude H₁.
@@ -48,7 +48,7 @@ and conclude H₁.
 critvalplot, tstat(2.57) name(tstat)
 /*
 The obtained t-statistic lies inside the critical region.
-From the graph it is clear that there is enough
+From the graph, it is clear that there is enough
 statistical evidence given the significance level of
 5% to reject the null-hypothesis H₀ and conclude
 the alternative hypothesis H₁.
@@ -67,7 +67,7 @@ The p-value is the probability of obtaining H₁ given
 H₀. If this value is lower than our significance level
 of 5% (⍺), it means that the outcome is rare and H₀
 should be rejected in favour of H₁.
-The values are not exactly the same becasue t-stat
+The values are not exactly the same because t-stat
 is not exactly normally distributed, it tends to a
 normal distribution as n gets larger.
 */
@@ -99,7 +99,7 @@ twoway (function y = normalden((x-0.303)/(sqrt(2)*0.0220)), range(0 1) lc(blue))
 TODO: What will the standard errors now become?
 TODO: Is the estimated ATE = 0.077 still significant
 with this sample size?
-In the second graph we can see how we lost accuracy
+In the second graph, we can see how we lost accuracy
 as the bell of the curves becomes wider than in the
 first graph.
 */
