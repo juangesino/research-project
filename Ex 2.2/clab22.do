@@ -13,7 +13,7 @@ set seed 123
 /*****      Start Part 1      *****/
 // Question 1
 // Open data file
-use upop_rdraw_20k.dta
+use upop.dta
 // Run provided programs.
 run progs.do
 // Generate random sample of 1000 observations.
@@ -58,7 +58,6 @@ ttest y , by(x) unequal
 /*
 The difference in t-statistic computation is explained
 by the rounding of numbers (3 decimal places).
-rounding
 */
 // Question 5
 pvalplot, tstat(2.58) name(pval)
@@ -78,12 +77,13 @@ normal distribution as n gets larger.
 // Question 6
 ttest y , by(x) unequal
 /*
-TODO: Is it likely that the true effect is 0.20?
-An effect of 0.02 would be inside the 95% CI
-and not be rejected.
-TODO: If JSA is only worth the cost if it reduces
-unemployment by 4%-points or more, does this sample
-produce conclusive evidence?
+The value 0.20 is outside the confidence interval (CI)
+found (0.0185 < μ₀ - μ₁ < 0.1363). Therefore, it would
+be unlikely to find an effect of 0.20.
+An effect of 0.02 would be inside the 95% CI and not
+be rejected.
+This sample produces enough statistical evidence, but
+not conclusive evidence.
 */
 // Question 7
 twoway (function y = normalden((x-0.303)/0.0220), range(0 1) lc(blue)) (function y = normalden((x-0.381)/0.0222), range(0 1) lc(red)), legend(order(1 "JSA=0" 2 "JSA=1")) xlabel(0 0.303 0.381 1) xline(0.303 0.381, lp(dash)) xtitle(mean employement) ytitle(density) name(diff)
@@ -96,9 +96,15 @@ and 0.381 when JSA was present.
 // Question 8
 twoway (function y = normalden((x-0.303)/(sqrt(2)*0.0220)), range(0 1) lc(blue)) (function y = normalden((x-0.381)/(sqrt(2)*0.0222)), range(0 1) lc(red)), legend(order(1 "JSA=0" 2 "JSA=1")) xlabel(0 0.303 0.381 1) xline(0.303 0.381, lp(dash)) xtitle(mean employement) ytitle(density) name(diff2)
 /*
-TODO: What will the standard errors now become?
-TODO: Is the estimated ATE = 0.077 still significant
-with this sample size?
+The standard error (SE) given that the standard deviation
+(SD) and the mean remain constant but n changes by a factor
+of 0.5 (from 1000 to 500) should change by a factor of
+square root of 2. Therefore, SE = 0.0424027847
+Because the means remain constant, the ATE (i.e.: the
+difference between the means) also remains constant.
+However, because the SE changes, the t-statistic changes
+and the value ATE = 0.077 is not significant for this
+sample size.
 In the second graph, we can see how we lost accuracy
 as the bell of the curves becomes wider than in the
 first graph.
